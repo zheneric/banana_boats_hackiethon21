@@ -1,31 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import "./App.css";
 
 function App() {
-
-  const [value, setValue] = useState(0);
+  const [userIsAuth, setUserIsAuth] = useState(false);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>Number of clicks: { value }</p>
-        <button onClick={ () => setValue(value + 1) }>Click this</button>
-      </header>
+      <Router>
+        <div>
+          <p>hello world!</p>
+
+          <p>
+            <Link to="/">Home</Link>
+          </p>
+          <p>
+            <Link to="/page2">Page 2</Link>
+          </p>
+          <p>
+            <Link to="/page3">Page 3</Link>
+          </p>
+        </div>
+        <hr />
+        <Switch>
+          <Route path="/page2">
+            <p>PAGE 2</p>
+          </Route>
+          <Route path="/page3">
+            <p>PAGE 3</p>
+          </Route>
+          <Route path="/">
+            <p>HOME PAGE</p>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
