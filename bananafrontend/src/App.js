@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 
+import { MainPage } from "./main-page";
+
 import "./App.css";
 
 function App() {
@@ -12,49 +14,9 @@ function App() {
 
   return (
     <div className="App">
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
-
-      <Router>
-        <div>
-          <p>hello world! </p>
-
-          <p>
-            <Link to="/">Home</Link>
-          </p>
-          <p>
-            <Link to="/page2">Page 2</Link>
-          </p>
-          <p>
-            <Link to="/page3">Page 3</Link>
-          </p>
-        </div>
-
-        <hr />
-        <Switch>
-          <Route path="/page2">
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => setShowText(!showText)}
-            >
-              click here to show text
-            </Button>
-            {showText && (
-              <p>
-                FOO BAR HSJKGDLJSLKDJDGSLDSKJLJGDKSLJGDSKJGSDLKDGjklfjgdkldfjgk
-              </p>
-            )}
-          </Route>
-          <Route path="/page3">
-            <p>PAGE 3</p>
-          </Route>
-          <Route path="/">
-            <p>HOME WORLD!</p>
-          </Route>
-        </Switch>
-      </Router>
+      if the user is logged in show the main page else if the use is not logged
+      in show the login page
+      <MainPage />
     </div>
   );
 }

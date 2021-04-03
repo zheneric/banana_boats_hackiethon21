@@ -1,2 +1,1 @@
-export { ResponsiveDrawer 
-(} );from "./main";
+export { MainPage } from "./main";
