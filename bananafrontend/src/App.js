@@ -12,9 +12,13 @@ function App() {
 
   return (
     <div className="App">
+      <Button variant="contained" color="primary">
+        Hello World
+      </Button>
+
       <Router>
         <div>
-          <p>hello world!</p>
+          <p>hello world! </p>
 
           <p>
             <Link to="/">Home</Link>
@@ -39,7 +43,7 @@ function App() {
             </Button>
             {showText && (
               <p>
-                FOO BAR HSJKGDLJSLKDJDGSLDSKJLJGDKSLJGDSKJGSDLKDGjklfjgdkldfjgkl
+                FOO BAR HSJKGDLJSLKDJDGSLDSKJLJGDKSLJGDSKJGSDLKDGjklfjgdkldfjgk
               </p>
             )}
           </Route>
@@ -47,7 +51,7 @@ function App() {
             <p>PAGE 3</p>
           </Route>
           <Route path="/">
-            <p>HOME PAGE</p>
+            <p>HOME WORLD!</p>
           </Route>
         </Switch>
       </Router>
