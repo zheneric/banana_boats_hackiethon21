@@ -60,9 +60,7 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     background: "none",
     backgroundColor: "#091232",
-    paddingTop: "1rem",
     paddingLeft: "6rem",
-    paddingBottom: "1rem",
   },
   appbarTitle: {
     color: "#FFF",
@@ -80,23 +78,24 @@ const useStyles = makeStyles((theme) => ({
   demoPageRoot: {
     minHeight: "100vh",
     alignItems: "center",
-    // display: "flex",
     justifyContent: "center",
-    // alignItems: "center",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
     },
-    padding: "5rem",
+    marginTop: "2rem",
+    paddingLeft: "6rem",
     backgroundColor: "#FFF",
   },
   demoVideo: {
     textAlign: "center",
   },
   image: {
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto",
-    paddingLeft: "6rem",
+    position: "relative",
+    right: "15%",
   },
 }));
 
