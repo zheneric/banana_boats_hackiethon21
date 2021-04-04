@@ -1,1 +1,1 @@
-export { dragDropCal } from "./main";
+export { DragDropCal } from "./main";

@@ -10,8 +10,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-import { useAuthState } from "react-firebase-hooks/auth";
-
 const firebaseConfig = {
   apiKey: "AIzaSyBaznSoNj7LuOZnaVTtxcj9r896M_4eEY0",
   authDomain: "bananaboats-7a42b.firebaseapp.com",

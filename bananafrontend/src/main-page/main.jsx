@@ -1,20 +1,35 @@
 import React, { useState } from "react";
 
 import { TaskPanel } from "./task-panel";
-import { dragDropCal } from "./calendar";
+import { DragDropCal } from "./calendar";
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { Container } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Drawer from "@material-ui/core/Drawer";
+import { makeStyles } from "@material-ui/core/styles";
+
+const drawerWidth = 300;
+
+const useStyles = makeStyles((theme) => ({
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+}));
 
 export function MainPage(props) {
   const { firebase } = props;
+
+  const classes = useStyles();
 
   const auth = firebase.auth();
   const firestore = firebase.firestore();
@@ -29,6 +44,8 @@ export function MainPage(props) {
   const query = tasksRef
     .where("uid", "==", user.uid)
     .where("scheduled", ">=", timeStamp);
+
+  // Load tasks
   const [tasks, loading] = useCollectionData(query, { idField: "id" });
 
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -53,61 +70,65 @@ export function MainPage(props) {
     setNewTaskLength(1);
   };
 
-  // Turn the tasks into components to show on screen
-  const taskCards =
-    !loading && tasks
-      ? tasks.map((task) => {
-          return (
-            <Card>
-              <CardContent>
-                <Typography>Task: {task.title}</Typography>
-                <Typography>Length: {task.length}</Typography>
-              </CardContent>
-            </Card>
-          );
-        })
-      : [<p>No tasks</p>];
-
   return (
     <div>
-      <dragDropCal />
-      <TaskPanel isOpen={taskPanelOpen} setIsOpen={setTaskPanelOpen} />
-      <div>{taskCards}</div>
+      <Grid container spacing={0}>
+        <Grid item xs>
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            anchor="left"
+            variant="permanent"
+          >
+            <form onSubmit={createTask}>
+              <TextField
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                required
+                onChange={(e) => setNewTaskTitle(e.target.value)}
+              />
 
-      <form onSubmit={createTask}>
-        <TextField
-          id="outlined-basic"
-          label="Name"
-          variant="outlined"
-          required
-          onChange={(e) => setNewTaskTitle(e.target.value)}
-        />
+              <TextField
+                id="outlined-basic"
+                label="Length"
+                variant="outlined"
+                required
+                type="number"
+                step="0.5"
+                endAdornment={
+                  <InputAdornment position="end">Hr</InputAdornment>
+                }
+                onChange={(e) => setNewTaskLength(e.target.value)}
+              />
 
-        <TextField
-          id="outlined-basic"
-          label="Length"
-          variant="outlined"
-          required
-          type="number"
-          step="0.5"
-          endAdornment={<InputAdornment position="end">Hr</InputAdornment>}
-          onChange={(e) => setNewTaskLength(e.target.value)}
-        />
-
-        <Button variant="contained" color="primary" type="submit">
-          Create new task
-        </Button>
-      </form>
-
-      <hr />
-
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => setTaskPanelOpen(!taskPanelOpen)}
-      >
-        Open/Close Side Panel
-      </Button>
+              <Button variant="contained" color="primary" type="submit">
+                Create new task
+              </Button>
+            </form>
+            <hr />
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => setTaskPanelOpen(!taskPanelOpen)}
+            >
+              Open/Close Side Panel
+            </Button>
+          </Drawer>
+        </Grid>
+        <Grid item xs>
+          <TaskPanel
+            isOpen={taskPanelOpen}
+            setIsOpen={setTaskPanelOpen}
+            tasks={tasks}
+            loading={loading}
+          />
+        </Grid>
+        <Grid item xs>
+          <DragDropCal />
+        </Grid>
+      </Grid>
     </div>
   );
 }
