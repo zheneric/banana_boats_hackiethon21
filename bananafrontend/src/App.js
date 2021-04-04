@@ -12,6 +12,8 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import { LandingPage } from "./landing-page";
+
 import "./App.css";
 
 const firebaseConfig = {
@@ -89,8 +91,8 @@ function App() {
   return (
     <div className="App">
       <CssBaseline />
+      <LandingPage />
       <SignInButton />
-      <p>This is where the Landing page will go :)</p>
     </div>
   );
 }
