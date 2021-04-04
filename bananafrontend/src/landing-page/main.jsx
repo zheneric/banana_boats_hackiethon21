@@ -4,6 +4,7 @@ import { AppBar, Collapse } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import example_cal from "./img/example_cal2.png";
+import timeit_brand from "./img/timeit_logo.png";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -56,18 +57,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     display: "flex",
     paddingLeft: "6rem",
+    paddingRight: "6rem",
   },
   appbar: {
     background: "none",
     backgroundColor: "#091232",
     paddingLeft: "6rem",
-  },
-  appbarTitle: {
-    color: "#FFF",
-    fontSize: "2rem",
-    flexGrow: "1",
-    width: "80%",
-    textAlign: "left",
+    paddingTop: "2rem",
+    paddingBottom: "2rem",
   },
   mainText: {
     color: "#FFF",
@@ -84,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginTop: "2rem",
     paddingLeft: "6rem",
+    paddingRight: "6rem",
     backgroundColor: "#FFF",
   },
   demoVideo: {
@@ -94,8 +92,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto",
-    position: "relative",
-    right: "15%",
+    // position: "relative",
+    // right: "15%",
+    width: "100%",
+    height: "100%",
+  },
+  brand_logo: {
+    display: "flex",
+    alignItems: "center",
+    width: "10%",
+    height: "10%",
   },
 }));
 
@@ -110,7 +116,8 @@ export function LandingPage() {
     <div className={classes.root}>
       <div className={classes.homePageRoot}>
         <AppBar className={classes.appbar} elevation={0}>
-          <h1 className={classes.appbarTitle}>Timeit.</h1>
+          {/* <h1 className={classes.appbarTitle}>Timeit.</h1> */}
+          <img className={classes.brand_logo} src={timeit_brand} alt="Logo" />
         </AppBar>
 
         <Collapse
@@ -128,7 +135,11 @@ export function LandingPage() {
                 <SignInButton />
               </Grid>
               <Grid item xs={6}>
-                <img className={classes.image} src={example_cal} alt="Logo" />
+                <img
+                  className={classes.image}
+                  src={example_cal}
+                  alt="Example"
+                />
               </Grid>
             </Grid>
           </div>
