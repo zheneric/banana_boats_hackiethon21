@@ -92,7 +92,6 @@ function App() {
     <div className="App">
       <CssBaseline />
       <LandingPage />
-      <SignInButton />
     </div>
   );
 }

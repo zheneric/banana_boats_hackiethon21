@@ -5,40 +5,77 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import example_cal from "./img/example_cal2.png";
 
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+
+import { useAuthState } from "react-firebase-hooks/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBaznSoNj7LuOZnaVTtxcj9r896M_4eEY0",
+  authDomain: "bananaboats-7a42b.firebaseapp.com",
+  projectId: "bananaboats-7a42b",
+  storageBucket: "bananaboats-7a42b.appspot.com",
+  messagingSenderId: "613212672185",
+  appId: "1:613212672185:web:34dc7058fc37fdb3040b68",
+  measurementId: "G-4Q4K5JSHE0",
+};
+
+function SignInButton() {
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  };
+
+  return (
+    <Button variant="contained" color="primary" onClick={signInWithGoogle}>
+      Sign in with Google
+    </Button>
+  );
+}
+
+// Initialize Firebase if not exists
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
+
+const auth = firebase.auth();
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    fontFamily: "Poppins",
+    margin: "0 auto",
+  },
+  homePageRoot: {
+    backgroundColor: "#091232",
+    textAlign: "left",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "left",
     height: "100vh",
-    fontFamily: "Poppins",
-    backgroundColor: "#091232",
+    display: "flex",
+    paddingLeft: "6rem",
   },
   appbar: {
     background: "none",
     backgroundColor: "#091232",
-    padding: "1rem",
+    paddingTop: "1rem",
+    paddingLeft: "6rem",
+    paddingBottom: "1rem",
   },
   appbarTitle: {
     color: "#FFF",
     fontSize: "2rem",
     flexGrow: "1",
     width: "80%",
-    margin: "0 auto",
     textAlign: "left",
-  },
-  columnLeft: {
-    margin: "100px",
   },
   mainText: {
     color: "#FFF",
     fontSize: "4rem",
     flexGrow: "1",
     textAlign: "left",
-  },
-  column: {
-    margin: "6rem",
   },
   demoPageRoot: {
     minHeight: "100vh",
@@ -55,15 +92,13 @@ const useStyles = makeStyles((theme) => ({
   demoVideo: {
     textAlign: "center",
   },
+  image: {
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "0 auto",
+    paddingLeft: "6rem",
+  },
 }));
-
-function SignInButton() {
-  return (
-    <Button variant="contained" color="#FFF">
-      Sign in with Google
-    </Button>
-  );
-}
 
 export function LandingPage() {
   const classes = useStyles();
@@ -73,12 +108,10 @@ export function LandingPage() {
   }, []);
 
   return (
-    <div>
-      <div className={classes.root}>
+    <div className={classes.root}>
+      <div className={classes.homePageRoot}>
         <AppBar className={classes.appbar} elevation={0}>
-          <h1 margin="96" className={classes.appbarTitle}>
-            Timeit.
-          </h1>
+          <h1 className={classes.appbarTitle}>Timeit.</h1>
         </AppBar>
 
         <Collapse
@@ -86,7 +119,7 @@ export function LandingPage() {
           {...(checked ? { timeout: 1500 } : {})}
           collapsedHeight={50}
         >
-          <div className={classes.container}>
+          <div>
             <Grid className={classes.column} container spacing={6}>
               <Grid item xs={6}>
                 <h1 className={classes.mainText}>
@@ -96,7 +129,7 @@ export function LandingPage() {
                 <SignInButton />
               </Grid>
               <Grid item xs={6}>
-                <img src={example_cal} alt="Logo" />
+                <img className={classes.image} src={example_cal} alt="Logo" />
               </Grid>
             </Grid>
           </div>
