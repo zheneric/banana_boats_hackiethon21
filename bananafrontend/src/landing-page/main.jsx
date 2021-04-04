@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "left",
     height: "100vh",
-    fontFamily: "Nunito",
+    fontFamily: "Poppins",
     backgroundColor: "#091232",
   },
   appbar: {
@@ -76,7 +76,9 @@ export function LandingPage() {
     <div>
       <div className={classes.root}>
         <AppBar className={classes.appbar} elevation={0}>
-          <h1 className={classes.appbarTitle}>Timeit.</h1>
+          <h1 margin="96" className={classes.appbarTitle}>
+            Timeit.
+          </h1>
         </AppBar>
 
         <Collapse
