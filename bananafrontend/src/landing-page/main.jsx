@@ -92,8 +92,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto",
-    // position: "relative",
-    // right: "15%",
     width: "100%",
     height: "100%",
   },
@@ -116,7 +114,6 @@ export function LandingPage() {
     <div className={classes.root}>
       <div className={classes.homePageRoot}>
         <AppBar className={classes.appbar} elevation={0}>
-          {/* <h1 className={classes.appbarTitle}>Timeit.</h1> */}
           <img className={classes.brand_logo} src={timeit_brand} alt="Logo" />
         </AppBar>
 
