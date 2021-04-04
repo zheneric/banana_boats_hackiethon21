@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { TaskPanel } from "./task-panel";
+import { dragDropCal } from "./calendar";
 
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
@@ -10,6 +11,7 @@ import CardContent from "@material-ui/core/CardContent";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { Container } from "@material-ui/core";
 
 export function MainPage(props) {
   const { firebase } = props;
@@ -68,8 +70,8 @@ export function MainPage(props) {
 
   return (
     <div>
+      <dragDropCal />
       <TaskPanel isOpen={taskPanelOpen} setIsOpen={setTaskPanelOpen} />
-
       <div>{taskCards}</div>
 
       <form onSubmit={createTask}>
